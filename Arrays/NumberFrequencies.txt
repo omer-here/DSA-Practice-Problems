@@ -1,0 +1,30 @@
+import java.util.*;
+public class NumberAppreance {
+    public static int getSingleElement (int[] arr){
+        HashMap<Integer, Integer> hp = new HashMap<>();
+        for(int i=0; i<arr.length; i++){
+            //Returns the value to which the specified key is mapped, 
+		//or defaultValue if this map contains no mapping for the key.
+            int value = hp.getOrDefault(arr[i], 0);
+            hp.put(arr[i], value + 1);
+        }
+        
+        //Find the single element and return the answer:
+        for (Map.Entry<Integer, Integer> it : hp.entrySet()) {
+            if (it.getValue() == 1) {
+                return it.getKey();
+            }
+        }
+
+        //This line will never execute
+        //if the array contains a single element.
+        return -1;
+    }
+
+    public static void main(String[] args) {
+       int[] arr = {4, 1, 2, 1, 2};
+        int ans = getSingleElement(arr);
+        System.out.println("The single element is: " + ans);
+
+    }      
+}

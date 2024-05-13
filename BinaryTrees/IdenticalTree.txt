@@ -1,0 +1,46 @@
+import java.util.*;
+class IdenticalBinaryTree {
+    
+    public static class Node {
+        public int key; 
+        public Node right;
+        public Node left;
+        
+    // Constructor to initialize
+    // the node with a value
+        Node(int val) {
+            key = val;
+            left = null;
+            right = null;
+        }
+    }
+    
+
+    
+    public static boolean checkSame(Node root1, Node root2){
+        if(root1 == null || root2==null){
+            return true;
+        }
+         return (root1.key == root2.key) && (checkSame(root1.left, root2.left) && checkSame(root1.right, root2.right));
+    }
+    
+   
+    public static void main(String[] args) {
+         // Node1
+        Node root1 = new Node(1);
+        root1.left = new Node(2);
+        root1.right = new Node(3);
+        root1.left.left = new Node(4);
+
+        // Node2
+        Node root2 = new Node(1);
+        root2.left = new Node(2);
+        root2.right = new Node(3);
+        root2.left.left = new Node(4);
+        
+        System.out.println(checkSame(root1,root2));
+        
+        
+        
+    }
+}

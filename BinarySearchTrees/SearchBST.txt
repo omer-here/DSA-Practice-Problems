@@ -1,0 +1,56 @@
+import java.util.*;
+class SearchBST {
+    
+    public static class Node {
+        public int key; 
+        public Node right;
+        public Node left;
+        
+    // Constructor to initialize
+    // the node with a value
+        Node(int val) {
+            key = val;
+            left = null;
+            right = null;
+        }
+    }
+    
+    public static int searchBST(Node root, int val) {
+        // Loop until either the tree is
+        // exhausted (null) or the value is found.
+        while (root != null && root.key != val) {
+            // Check if the target value is
+            // less than the current node's value.
+            // If so, move to the left subtree
+            // (values smaller than the current node).
+            // Otherwise, move to the right subtree
+            // (values larger than the current node).
+            root = val < root.key ? root.left : root.right;
+        }
+        // Return the node containing the target value,
+        // if found; otherwise, return null.
+        if(root != null){
+            return root.key;    
+        }
+        return -1;
+    }
+    
+
+   
+    public static void main(String[] args) {
+       Node root = new Node(3);
+        root.left = new Node(5);
+        root.right = new Node(1);
+        root.left.left = new Node(6);
+        root.left.right = new Node(2);
+        root.right.left = new Node(0);
+        root.right.right = new Node(8);
+        root.left.right.left = new Node(7);
+        root.left.right.right = new Node(4);
+        
+        System.out.println(searchBST(root, 18));
+        
+        
+        
+    }
+}

@@ -1,0 +1,58 @@
+
+import java.io.*;
+class SecondLargestAndSecondSmallest {
+    public static int SecondLargest(int[] arr){
+        int n = arr.length;
+        if(n<2) return -1; 
+        
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+        for(int i=0; i<n; i++){
+            //found Largest
+            if(arr[i]>largest){
+                
+                //assign previous to secondLargest
+                secondLargest = largest;
+                //updates largest
+                largest = arr[i];
+                 
+            }
+            if(arr[i]>secondLargest && arr[i] != largest){
+                secondLargest = arr[i];
+            }
+        }
+        return secondLargest;
+        
+    }
+    
+        public static int SecondSmallest(int[] arr){
+        int n = arr.length;
+        if(n<2) return -1; 
+        
+        int smallest = Integer.MAX_VALUE;
+        int secondSmallest = Integer.MAX_VALUE;
+        for(int i=0; i<n; i++){
+            //found Smallest
+            if(arr[i]<smallest){
+                
+                //assign previous to secondSmallest
+                secondSmallest = smallest;
+                //updates largest
+                smallest = arr[i];
+                 
+            }
+            if(arr[i]<secondSmallest && arr[i] != smallest){
+                secondSmallest = arr[i];
+            }
+        }
+        return secondSmallest;
+        
+    }
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 4, 7, 7, 5};
+        int sl = SecondLargest(arr);
+        int ss = SecondSmallest(arr);
+        System.out.println(sl);
+        System.out.println(ss);
+    }
+}

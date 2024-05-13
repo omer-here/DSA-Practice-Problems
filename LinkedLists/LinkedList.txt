@@ -1,0 +1,158 @@
+import java.util.*;
+class LinkedList {
+    public static class Node {
+        // Data stored in the node
+        public int data;
+        // Reference to the next node in the list (forward direction)
+        public Node next;
+        // Reference to the previous node in the list (backward direction)
+        public Node back;
+
+        // Constructor for a Node with both data, a reference to the next node, and a reference to the previous node
+        public Node(int data1, Node next1, Node back1) {
+            data = data1;
+            next = next1;
+            back = back1;
+        }
+
+        // Constructor for a Node with data, and no references to the next and previous nodes (end of the list)
+        public Node(int data1) {
+            data = data1;
+            next = null;
+            back = null;
+        }
+    }
+    
+    
+    public static void insertLL(int data, Node head){
+        Node current = head; 
+        Node temp = new Node(data); 
+        // if(current == null) return temp;
+        while(current.next != null){
+            current = current.next; 
+        }
+        current.next = temp; 
+        temp.back = current;
+    }
+    
+    public static void searchLL(int target, Node head){
+        Node temp = head; 
+        if(temp.data == target) System.out.println(temp.data);
+        
+        while(temp.next != null){
+            if(temp.data == target) {
+                System.out.println(temp.data);
+                break;
+            }
+            temp = temp.next;
+        }
+    }
+    
+    public static void deleteLL(int target,Node head){
+        Node temp = head;
+        
+        //if it is head 
+        if(temp.data == target){
+           head = temp.next;
+           head.back = null;
+    
+        }
+        //for mid nodes
+        while(temp.next != null){
+            if(temp.data == target){
+                Node current = temp.back; 
+                current.next=temp.next; 
+                temp.next.back = current;
+                break;
+            }
+            temp = temp.next;
+        }
+        //for the last node
+        if(temp.next == null && temp.data == target){
+            Node current = temp.back; 
+            current.next = null;
+        }
+    }
+    
+    public static void insertAt(int position,int data, Node head){
+         Node temp = head;
+        int currPosition = 1;
+        if(currPosition == position){
+            Node current = new Node(data);
+            // head = head.next;
+            current.next = temp;
+            temp.back = current;
+            current.back = null;
+          
+            
+            
+            return;
+        }
+        
+        //for mid values
+        while(temp.next != null){
+            
+            if(currPosition == position){
+                Node current = new Node(data);
+                temp.back.next = current; 
+                current.back = temp.back;
+                current.next = temp; 
+                temp.back = current;
+            }
+            temp = temp.next; 
+            currPosition ++;
+        }
+
+        //for tail
+        currPosition ++;
+        if(currPosition == position){
+        Node current = new Node(data);
+        temp.next = current;
+        current.back = temp;
+        current.next = null; 
+        }
+        
+    }
+    
+    
+    public static void main(String[] args) {
+       Node head = new Node(1);
+       insertLL(2,head);
+       insertLL(3,head);
+       insertLL(5,head);
+       
+       //searchLL(3, head);
+       //deleteLL(1,head);
+       insertAt(1, 0 , head);
+       
+      //printing forward
+      int count = 0; 
+      Node printNode = head;
+      if(printNode != null){
+          System.out.println(printNode.data);
+          count++;
+              while(printNode.next != null){
+              printNode = printNode.next;
+              System.out.println(printNode.data);
+              count++;
+            }
+      }
+      //System.out.println(count);
+      
+       
+      // printing backward
+    //   Node backPrint = head; 
+    //   while(backPrint.next != null){
+    //       backPrint = backPrint.next;
+    //   }
+      
+    //   //now we've reached last node
+    //   System.out.println(backPrint.data);
+    //   while(backPrint.back != null){
+    //       backPrint = backPrint.back;
+    //       System.out.println(backPrint.data);
+    //   }
+       
+       
+    }
+}

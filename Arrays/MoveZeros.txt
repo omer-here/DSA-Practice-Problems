@@ -1,0 +1,36 @@
+import java.util.*;
+class MoveZeros {
+     static void swap(int m, int n)
+    {
+        // Swapping the values
+        int temp = m;
+        m = n;
+        n = temp;
+        // System.out.println("Value of m is " + m
+        //                   + " and Value of n is " + n);
+    }
+    
+    public static int[] move(int n, int[] arr){
+        int j = n-1;
+        for(int i=0; i<n; i++){
+            if(arr[i] == 0 && i < j){
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+                j--;
+            }
+        }
+        return arr;
+    }
+    public static void main(String[] args) {
+        int[] arr = {1, 0, 2, 3, 2, 0, 0, 4, 5, 1};
+        int n = arr.length;
+        int[] ans = move(n, arr);
+        for (int i = 0; i < n; i++) {
+            System.out.print(ans[i] + " ");
+        }
+        // System.out.println("");
+       
+        
+    }
+}

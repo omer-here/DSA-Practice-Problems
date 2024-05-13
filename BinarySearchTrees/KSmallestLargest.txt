@@ -1,0 +1,85 @@
+import java.util.*;
+class KthSmallestLargest {
+    
+    public static class Node {
+        public int key; 
+        public Node right;
+        public Node left;
+        
+    // Constructor to initialize
+    // the node with a value
+        Node(int val) {
+            key = val;
+            left = null;
+            right = null;
+        }
+    }
+    
+    public static void StoreInInorder(Node node, ArrayList<Integer> arr) {
+        if (node == null) {
+            return;
+        }
+        // Recursive call to the left subtree
+        StoreInInorder(node.left, arr);
+        
+        // Push the value of current
+        // node into the vector
+        arr.add(node.key);
+        
+        // Recursive call to the right subtree
+        StoreInInorder(node.right, arr);
+        
+        return;
+    }
+    
+     public static ArrayList findKth(Node node, int k) {
+        // List to store the
+        // elements of the BST
+        ArrayList<Integer> arr = new ArrayList<>();
+        
+        // Perform inorder traversal
+        // to populate the vector
+        StoreInInorder(node, arr);
+        
+        // Calculate Kth largest
+        // and smallest elements
+        int kLargest = arr.get(arr.size() - k);
+        int kSmallest = arr.get(k - 1); 
+        
+        ArrayList<Integer> KthList = new ArrayList<>();
+        // Returning a list containing
+        // Kth smallest and largest elements
+        KthList.add(kSmallest);
+        KthList.add(kLargest);
+        return KthList;
+    }
+   
+    public static void main(String[] args) {
+        Node root = new Node(10);
+        root.left = new Node(5);
+        root.right = new Node(13);
+        root.left.left = new Node(3);
+        root.left.left.left = new Node(2);
+        root.left.left.right = new Node(4);
+        root.left.right = new Node(6);
+        root.left.right.right = new Node(9);
+        root.right.left = new Node(11);
+        root.right.right = new Node(14);
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        int k = 3;
+        ans = findKth(root, k);
+        
+        System.out.println("Kth Smallest: "+ ans.get(0));
+        System.out.println("Kth Largest: "+ ans.get(1));
+        // StoreInInorder(root, arr);
+        // for(Integer it: arr){
+        //     System.out.println(it);
+        // }
+        
+        
+        
+        
+        
+    }
+}

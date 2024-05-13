@@ -1,0 +1,36 @@
+import java.util.*;
+class ReverseWords {
+    public static void main(String[] args) {
+       String s = "TUF is great for interview preparation";
+	System.out.println("Before reversing words: ");
+	System.out.println(s);
+
+	s += " "; // adding space at the end to meet condition
+
+	Stack<String> st = new Stack<String>();
+	
+	String str = "";
+	for (int i = 0;i < s.length();i++)
+	{
+		if (s.charAt(i) == ' ')
+		{
+			st.push(str);
+			str = "";
+		}
+		else
+		{
+			str += s.charAt(i);
+		}
+	}
+	String ans = "";
+	while (st.size() != 1)
+	{
+		ans += st.peek() + " ";
+		st.pop();
+	}
+	ans += st.peek(); // The last word should'nt have a space after it
+	System.out.println("After reversing words: ");
+	System.out.print(ans);
+}
+    
+}

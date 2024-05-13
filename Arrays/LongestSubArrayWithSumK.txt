@@ -1,0 +1,33 @@
+import java.util.*;
+public class LongestSubArray {
+    public static int getLongestSubarray (int[] arr, long k){
+        int maxLength = 0;
+        int right=0;
+        int left=0;
+        int sum=arr[0]; 
+        while(right < arr.length){
+            while(left<=right && sum > k){
+                 sum -= arr[left]; //subtract arr[left]
+                left++; //move forward
+            }
+                        // if sum = k, update the maxLen i.e. answer:
+            if (sum == k) {
+                maxLength = Math.max(maxLength, right - left + 1);
+            }
+            // Move forward thw right pointer:
+            right++;
+            if (right < arr.length) {
+                sum += arr[right];
+            }
+        }
+    
+        return maxLength;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {2, 4, 5, 1, 9};
+        long k = 10;
+        int len = getLongestSubarray(a, k);
+        System.out.println("The length of the longest subarray is: " + len);
+    }      
+}

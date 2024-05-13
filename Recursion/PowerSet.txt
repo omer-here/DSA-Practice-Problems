@@ -1,0 +1,38 @@
+import java.util.*;
+class PrintSubSequences {
+    
+    static ArrayList<String> AllPossibleStrings(String s) {
+	int n = s.length();
+	ArrayList<String>ans=new ArrayList<>();
+	// (1 << 3) = Binary(1000) = Decimal( 8 )
+	for (int num = 0; num < (1 << n); num++) {
+		String sub = "";
+		//here i will move from 0 to 2 as n = 3
+		for (int i = 0; i < n; i++) {
+			//check if the ith bit is set or not
+			if ((num & (1 << i))!=0) {
+			    // let say num = 3 = 0 1 1
+			    // and i = 1 then  = 0 1 0
+			    //           &     = 0 1 0 (true)
+				sub += s.charAt(i);
+			}
+		}
+		if (sub.length() > 0) {
+			ans.add(sub);
+		}
+	}
+	Collections.sort(ans);
+	return ans;
+}
+    
+    public static void main(String[] args) {
+        	String s="abc";
+	ArrayList<String>ans = AllPossibleStrings(s);
+	//printint all the subsequence.
+	System.out.println("All possible subsequences are ");
+	for (String it : ans) {
+		System.out.print( it+" ");
+	}
+
+    }
+}

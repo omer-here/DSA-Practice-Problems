@@ -1,0 +1,93 @@
+import java.util.*;
+class HeightOfBinaryTree {
+    
+    
+    
+    public static class Node {
+        public int key; 
+        public Node right;
+        public Node left;
+        
+    // Constructor to initialize
+    // the node with a value
+        Node(int val) {
+            key = val;
+            left = null;
+            right = null;
+        }
+    }
+    
+    
+    //Recursive Approach
+    public static int maxDepth(Node root){
+        if(root == null){
+            return 0;
+        }
+        int leftHeight = maxDepth(root.left);
+        int rightHeight = maxDepth(root.right);
+        
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+    
+    //Iterative Appraoch
+    public static int maxDepth2(Node root) {
+        // If the root is NULL
+        // (empty tree), depth is 0
+        if (root == null) {
+            return 0;
+        }
+
+        // Create a queue for
+        // level order traversal
+        Queue<Node> q = new LinkedList<>();
+        int level = 0;
+
+        // Push the root node into the queue
+        q.add(root);
+
+        // While there are nodes in the queue
+        while (!q.isEmpty()) {
+            // Get the number of nodes
+            // at the current level
+            int size = q.size();
+
+            // Process all nodes
+            // at the current level
+            for (int i = 0; i < size; i++) {
+                // Get the front node in the queue
+                Node front = q.poll();
+
+                // Enqueue left child if exists
+                if (front.left != null) {
+                    q.add(front.left);
+                }
+
+                // Enqueue right child if exists
+                if (front.right != null) {
+                    q.add(front.right);
+                }
+            }
+            // Increment level to
+            // move to the next level
+            level++;
+        }
+        // Return the level, which represents
+        // the maximum depth of the tree
+        return level;
+    }
+
+
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        
+        // int height = maxDepth2(root);
+        int height = maxDepth(root);
+        System.out.println(height);
+        
+        
+    }
+}

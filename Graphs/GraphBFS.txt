@@ -1,0 +1,59 @@
+So, whenever a node goes into the queue it is then marked as visited. Then it is polled and added to the ans array while at the same time pushes to arr.get(polledNode) list to the queue and marked as visited if they are not.
+
+import java.util.*;
+class GraphBFS {
+   
+   public static ArrayList<Integer> BFS (int V, ArrayList<ArrayList<Integer>> adjList){
+       //creation of an array that needs to be returned 
+       ArrayList < Integer > bfs = new ArrayList < > ();
+       //visited array
+       boolean vis[] = new boolean[V];
+       Queue<Integer> q = new LinkedList<>();
+       
+        q.add(0); // add to the queue
+        vis[0] = true; //marked as visited
+        
+        while(q.isEmpty() == false){
+            Integer node = q.poll();
+            bfs.add(node); //add to the bfs array
+            
+            // Get all adjacent vertices of the dequeued vertex node
+            // If a adjacent has not been visited, then mark it
+            // visited and enqueue it
+            for (Integer it: adjList.get(node)) {
+                if (vis[it] == false) {
+                    vis[it] = true;
+                    q.add(it);
+                }
+            }
+        }
+        return bfs;
+   }
+   
+    public static void main(String[] args) {
+        //Preparing Adjcency List
+      ArrayList<ArrayList<Integer>> adjList = new ArrayList<>(5);
+      for(int i=0; i<5; i++){
+          adjList.add(new ArrayList<Integer>());
+      }
+      //undirected Graph 
+      //adj.get(u(source)).add(v(destination))
+      //adj.get(v(destination)).add(u(source))
+      
+        adjList.get(0).add(1);
+        adjList.get(1).add(0); 
+        adjList.get(0).add(4);
+        adjList.get(4).add(0);
+        adjList.get(1).add(2);
+        adjList.get(2).add(1);
+        adjList.get(1).add(3);
+        adjList.get(3).add(1);
+        
+        ArrayList < Integer > ans = BFS(5, adjList);
+        for(Integer it: ans){
+            System.out.println(it);
+        }
+        //Time Complexity: O(N) + O(2E), Where N = Nodes, 2E is for total degrees as we traverse all adjacent nodes.
+        //Space Complexity: O(3N) ~ O(N), Space for queue data structure visited array and an adjacency list
+    }
+}

@@ -1,0 +1,55 @@
+import java.util.*;
+public class TwoSumProblem {
+    
+    public static int[] twoSum (int n, int[] arr, int target){
+        int[] ans = new int[2];
+        HashMap<Integer, Integer> hp = new HashMap<>();
+        //<Value, Index>
+        for(int i=0; i<n; i++){
+        int num = arr[i];
+        int moreNeeded = target - num;
+        if(hp.containsKey(moreNeeded)){
+             ans[0] = hp.get(moreNeeded);
+                ans[1] = i;
+                return ans;
+            }
+        hp.put(arr[i], i);       //First Iteration: <2,0> 
+        }
+        return ans;
+    }
+    
+    public static int[] MoreOptimized(int n, int[] arr, int target){
+        int[] ans = new int[2];
+        
+        Arrays.sort(arr);
+        int i = 0;
+        int j = n - 1;
+        while (i<=j){
+            if(arr[i] + arr[j] == target) {
+                ans[0] = i;
+                ans[1] = j; 
+            }
+            else if(arr[i] + arr[j] < target){
+                i++;
+            }
+            else{
+                j--;
+            }
+        }
+        return ans;
+    } 
+
+    public static void main(String[] args) {
+        int n = 5;
+        int[] arr = {2, 6, 5, 8, 11};
+        int target = 14;
+        // int[] ans = twoSum(n, arr, target);
+        int[] ans = MoreOptimized(n, arr, target);
+        //2nd variant: Return indices of the two numbers such that their sum is equal to the target. 
+	//Otherwise, we will return {-1, -1}.
+        System.out.println("This is the answer for variant 2: [" + ans[0] + ", " + ans[1] + "]");
+        
+        
+
+    }      
+}

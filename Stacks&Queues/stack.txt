@@ -1,0 +1,27 @@
+//push(): Insert the element in the stack.
+
+//pop(): Remove and return the topmost element of the stack.
+
+//top(): Return the topmost element of the stack
+
+//size(): Return the number of remaining elements in the stack.
+
+import java.util.*;
+class Stack {
+    
+    public static void main(String[] args) {
+         Stack<Integer> stack = new Stack<>();
+ 
+        // Push elements onto the stack
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+ 
+        // Pop elements from the stack
+        while(!stack.isEmpty()) {
+            System.out.println(stack.pop());
+        }
+
+    }
+}

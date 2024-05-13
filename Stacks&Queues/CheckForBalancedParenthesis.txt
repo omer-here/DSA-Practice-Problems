@@ -1,0 +1,32 @@
+We have to keep track of previous as well as most recent opening brackets and also keep in mind the sequence, as after opening of the bracket there should be opposite pairs of brackets. Also handle the corner cases like [ ) ( ] where closing bracket occurs first and opening bracket after it, which is an invalid sequence, as well as [ ( ] ) where the most recent opening didn't get its opposite pair hence it will also not be valid.
+
+So we have to use a data structure that will keep track of first in and last out, hence we will use the stack.
+
+import java.util.*;
+class CheckParenthesis {
+    
+    public static boolean isValid(String s){
+         Stack<Character> st = new Stack<Character>();
+         
+        for (char it : s.toCharArray()) {
+            if (it == '(' || it == '[' || it == '{')
+                st.push(it);
+            else {
+                if(st.isEmpty()) return false;
+                char ch = st.pop(); 
+                if((it == ')' && ch == '(') ||  (it == ']' && ch == '[') || (it == '}' && ch == '{')) 
+                    continue;
+                else 
+                    return false;
+            }
+        }
+        return st.isEmpty(); //at the end stack would become empty (true)
+    }
+    public static void main(String[] args) {
+        String s="()[{}(]";
+		if(isValid(s)==true)
+		System.out.println("true");
+		else
+		System.out.println("false");
+    }
+}

@@ -1,0 +1,91 @@
+Follow the below steps to solve the problem:
+
+Do In-Order Traversal of the given tree and store the result in a temp array. 
+Check if the temp array is sorted in ascending order, if it is, then the tree is BST.
+Note: We can avoid the use of an Auxiliary Array. While doing In-Order traversal, we can keep track of previously visited nodes. If the value of the currently visited node is less than the previous value, then the tree is not BST.
+
+import java.util.*;
+class ValidateBST {
+    
+    public static class Node {
+        public int key; 
+        public Node right;
+        public Node left;
+        
+    // Constructor to initialize
+    // the node with a value
+        Node(int val) {
+            key = val;
+            left = null;
+            right = null;
+        }
+    }
+    
+    static Node prev;
+    
+    public static Boolean isBSTUtil(Node root)
+    {
+        // traverse the tree in inorder fashion and
+        // keep track of prev node
+        if(root != null ){
+            if(isBSTUtil(root.left) == false){
+                return false;
+            }
+                
+            // Allows only distinct valued nodes
+            if (prev != null && root.key <= prev.key)
+                return false;
+ 
+            prev = root;
+ 
+            return isBSTUtil(root.right);
+        }    
+        
+        return true;
+    }
+ 
+
+ 
+    /* Returns true if the given tree is a BST and its
+      values are >= min and <= max. */
+    public static boolean isBSTRange(Node node, int min, int max)
+    {
+        /* an empty tree is BST */
+        if (node == null)
+            return true;
+ 
+        /* false if this node violates the min/max
+         * constraints */
+        if (node.key < min || node.key > max)
+            return false;
+ 
+        /* otherwise check the subtrees recursively
+        tightening the min/max constraints */
+        // Allow only distinct values
+        return (
+            isBSTRange(node.left, min, node.key - 1)
+            && isBSTRange(node.right, node.key + 1, max));
+    }
+ 
+   
+    public static void main(String[] args) {
+        Node root = new Node(10);
+        root.left = new Node(5);
+        root.right = new Node(13);
+        root.left.left = new Node(3);
+        root.left.left.left = new Node(2);
+        root.left.left.right = new Node(4);
+        root.left.right = new Node(6);
+        root.left.right.right = new Node(9);
+        root.right.left = new Node(11);
+        root.right.right = new Node(14);
+        
+       //if (isBSTUtil(root))
+        if (isBSTRange(root, Integer.MIN_VALUE,
+                         Integer.MAX_VALUE))
+            System.out.println("Is BST");
+        else
+            System.out.println("Not a BST");
+        
+    }
+}

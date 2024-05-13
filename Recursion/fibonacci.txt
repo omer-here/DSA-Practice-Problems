@@ -1,0 +1,19 @@
+import java.util.*;
+class FibonacciSequence {
+    
+    public static int fibonacci(int n){
+        if(n == 0) return 0; 
+        if(n == 1) return 1;
+        return fibonacci(n-1)  + fibonacci(n-2); 
+    }
+    
+    
+    public static void main(String[] args) {
+         // Here, let’s take the value of N to be 4.
+       int N = 4;
+       for(int i=0; i<=N; i++){
+           System.out.println(fibonacci(i));
+       } 
+      
+    }
+}

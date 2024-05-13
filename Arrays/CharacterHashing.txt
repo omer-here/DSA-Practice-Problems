@@ -1,0 +1,36 @@
+import java.util.*;
+class CharacterHashing {
+    public static int naive(String s, Character c){
+        int count = 0; 
+        // char[] chArr = s.toCharArray(); 1 method
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i) == c){
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    public static int Optimal(String s, Character c){
+      HashMap<Character, Integer> hp = new HashMap<>();
+      for(int i=0; i<s.length(); i++){
+          int value = hp.getOrDefault(s.charAt(i),0);
+          hp.put(s.charAt(i), value + 1);
+      }
+      
+        // for (Map.Entry<Character, Integer> it : hp.entrySet()) {
+        //         System.out.println( it.getValue());
+        // }
+
+      return hp.get(c);
+    }
+    
+    public static void main(String[] args) {
+        String s = "abcdabcfc";
+        Character ch = 'c';
+        int frequency = Optimal(s,ch);
+        System.out.println(frequency);
+        
+        
+    }
+}

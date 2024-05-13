@@ -1,0 +1,83 @@
+import java.util.*;
+class BinaryTreeTraversals {
+    
+    public static class Node {
+        public int key; 
+        public Node right;
+        public Node left;
+        
+         // Constructor to initialize
+    // the node with a value
+        Node(int val) {
+            key = val;
+            left = null;
+            right = null;
+        }
+    }
+    
+   public static void printInorder(Node node)
+    {
+        if (node == null)
+        return;
+
+        // First recur on left child
+        printInorder(node.left);
+
+        // Then print the data of node
+        System.out.print(node.key + " ");
+
+        // Now recur on right child
+        printInorder(node.right);
+    }
+    
+    // Given a binary tree, print its nodes in preorder
+public static void printPreorder(Node node)
+{
+    if (node == null)
+        return;
+
+    // First print data of node
+    System.out.print(node.key + " ");
+
+    // Then recur on left subtree
+    printPreorder(node.left);
+
+    // Now recur on right subtree
+    printPreorder(node.right);
+}
+
+// Given a binary tree, print its nodes according to the
+// "bottom-up" postorder traversal.
+public static void printPostorder(Node node)
+{
+    if (node == null)
+        return;
+
+    // First recur on left subtree
+    printPostorder(node.left);
+
+    // Then recur on right subtree
+    printPostorder(node.right);
+
+    // Now deal with the node
+    System.out.print(node.key + " ");
+}
+
+
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        System.out.print("Inorder: ");
+        printInorder(root);
+        System.out.println("");
+        System.out.print("Preorder: ");
+        printPreorder(root);
+        System.out.println("");
+        System.out.print("Postorder: ");
+        printPostorder(root);
+        
+    }
+}
