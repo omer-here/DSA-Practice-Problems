@@ -1,9 +1,9 @@
-import java.util.;
+import java.util.*;
 public class ConsecutiveOnes {
     public static int findMaxConsecutiveOnes(int[] arr){
         int maxOnes = 0;
         int count = 0;
-        for(int i=0; iarr.length; i++){
+        for(int i=0; i<arr.length; i++){
             if(arr[i] == 1){
                 count ++;
             }
@@ -19,6 +19,6 @@ public class ConsecutiveOnes {
     public static void main(String[] args) {
         int nums[] = { 1, 1, 0, 1, 1, 1 , 1, 1 };
         int ans = findMaxConsecutiveOnes(nums);
-        System.out.println(The maximum  consecutive 1's are  + ans);
+        System.out.println("The maximum  consecutive 1's are :"  + ans);
     }      
 }
